@@ -1,3 +1,4 @@
 points_raw_data_by_class/
 venv/
 .DS_Store
+.pytest_cache

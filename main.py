@@ -1,6 +1,8 @@
-from points_module.data_wrangling import load_data
+from points_module.data_wrangling import sheets_merge
+from points_module.data_privacy import anonymize_student_n_teacher
 
 raw_data_path = "points_raw_data_by_class/points_data_vicky_t.xlsx"
 if __name__ == "__main__":
-    load_data(raw_data_path)
+    points_df = sheets_merge(raw_data_path)
+    points_df = anonymize_student_n_teacher(points_df)
     print("__main__")
