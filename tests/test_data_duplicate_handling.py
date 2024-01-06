@@ -11,7 +11,7 @@ from points_module.data_wrangling import (
     exact_duplicates_handling,
 )
 from points_module.data_privacy import anonymize_student_n_teacher
-from points_module.data_generation import aggregate_data_by_student
+from points_module.data_duplicate_handling import aggregate_data_by_student
 
 
 def test_exact_duplicates_handling():

@@ -4,7 +4,8 @@ from points_module.data_wrangling import (
     exact_duplicates_handling,
 )
 from points_module.data_privacy import anonymize_student_n_teacher
-from points_module.data_generation import aggregate_data_by_student
+from points_module.data_duplicate_handling import aggregate_data_by_student
+import pandas as pd
 
 
 def build_clean_df(raw_data_path: str):
@@ -47,3 +48,17 @@ def build_points_by_reasons_per_class_bar_data(df):
     result["percentage"] = (result["count"] / len(df)).round(2) * 100
 
     return result
+
+
+def build_points_time_series_df(df):
+    group_by_student_df = (
+        df.groupby(by=["date", "student"], observed=True)
+        .agg({"value": "sum"})
+        .reset_index()
+    )
+    group_by_student_df.sort_values(by=["student", "date"], inplace=True)
+    group_by_student_df["running_sum"] = group_by_student_df.groupby(
+        by=["student"], observed=False
+    ).value.cumsum()
+
+    return group_by_student_df

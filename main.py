@@ -2,6 +2,7 @@ from points_module.data_build import (
     build_aggregated_data_by_student_df,
     build_clean_df,
     build_aggregated_data_by_student_with_static_pos_to_neg_ratio_df,
+    build_points_time_series_df,
 )
 from point_visual_module.visuals import (
     points_by_teacher_per_class_bar,
@@ -10,6 +11,7 @@ from point_visual_module.visuals import (
     plot_box_based_on_positive_to_negative_point_ratio,
     top_n_bottom_net_point_perf_bar,
     top_n_bottom_positive_to_negative_ratio_perf_bar,
+    cumulative_sum_of_points_time_series_line,
 )
 from points_queries_module.queries import (
     get_head_and_tail_students_based_on_net_points,
@@ -50,4 +52,7 @@ if __name__ == "__main__":
         ),
     )
     comments_info = get_comments_usage_by_teacher_info(points_df)
+
+    points_time_series_df = build_points_time_series_df(points_df)
+    cumulative_sum_of_points_time_series_line(points_time_series_df)
     print("__main__")

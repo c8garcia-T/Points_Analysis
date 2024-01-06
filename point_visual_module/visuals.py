@@ -120,3 +120,24 @@ def top_n_bottom_positive_to_negative_ratio_perf_bar(df_aggregated_ratio, df_plo
     print(
         f"Mean: {round(class_mean,2)} Std: {round(class_std,2)} Median: {round(class_median,2)}"
     )
+
+
+def cumulative_sum_of_points_time_series_line(df_time_series):
+    fig = px.line(
+        df_time_series,
+        x="date",
+        y="running_sum",
+        color="student",
+        markers=True,
+        line_shape="linear",
+        color_discrete_map={key: "darkblue" for key in df_time_series.student.unique()},
+        title="Cumulative Points Over Time",
+    )
+    fig.update_traces(line=dict(width=1.5))
+    fig.update_traces(marker=dict(size=3))
+    term_median = df_time_series.value.median()
+    fig.add_hline(y=0, line_dash="dash", line_color="gold", annotation_text="Zero Line")
+    fig.add_hline(
+        y=term_median, line_dash="dash", line_color="gold", annotation_text="Median"
+    )
+    fig.show()
