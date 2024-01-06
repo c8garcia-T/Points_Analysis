@@ -38,12 +38,23 @@ def test_data_wrangling():
         result = sheets_merge(os.path.join(data_dir, files[0]))
     result = anonymize_student_n_teacher(result)
     result = data_wrangling(result)
+    # Check Creation of columns
+    assert all(
+        (
+            (
+                result["negative_point_assigned"].fillna(0)
+                + result["positive_point_assigned"].fillna(0)
+            )
+            == result["value"]
+        ).tolist()
+    )
     # Desired data types
     desired_dtypes = {
         "value": np.int64,
         "negative_point_assigned": np.float64,
         "positive_point_assigned": np.float64,
     }
+
     # Check if DataFrame has the desired data types
 
     assert all(result[col].dtype == dtype for col, dtype in desired_dtypes.items())
