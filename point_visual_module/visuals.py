@@ -20,3 +20,21 @@ def points_by_reasons_per_class_bar(df):
     fig = px.bar(data, x="reason", y="count", hover_data=["percentage"])
     fig.update_layout(title_text="Distribution of Point Assignment Instances by Reason")
     fig.show()
+
+
+def plot_box_based_on_positive_to_negative_point_ratio(df):
+    # test na
+    fig = px.box(
+        df["Positive to Negative Points Ratio"],
+        title="Net Points Distribution",
+    )
+    fig.show()
+
+
+def plot_box_based_on_net_points(df):
+    # test na
+    fig = px.box(
+        df["Points"],
+        title="Net Points Distribution",
+    )
+    fig.show()

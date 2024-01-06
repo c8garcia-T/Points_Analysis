@@ -28,7 +28,7 @@ def build_aggregated_data_by_student_with_static_pos_to_neg_ratio_df(
     result = build_aggregated_data_by_student_df(raw_data_path)
     result[("Positive to Negative Points Ratio", "Static Estimate")] = (
         result[("Positive point assigned", "sum")]
-        / result[("Negative point assigned", "sum")]
+        / result[("Negative point assigned", "sum")].abs()
     )
     return result
 
