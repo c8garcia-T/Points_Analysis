@@ -3,4 +3,4 @@ venv/
 .DS_Store
 .pytest_cache
 TODO.md
-tests/__pycache__/
+*/__pycache__/
