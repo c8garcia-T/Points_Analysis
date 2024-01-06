@@ -11,7 +11,7 @@ def points_by_teacher_per_class_bar(df):
     fig.update_layout(
         title_text="Distribution of Point Assignment Instances by Teacher"
     )
-    fig.show()
+    return fig
 
 
 def points_by_reasons_per_class_bar(df, top_three_filter=False):
@@ -29,9 +29,10 @@ def points_by_reasons_per_class_bar(df, top_three_filter=False):
     fig.add_hline(
         y=class_median, line_dash="dash", line_color="red", annotation_text="median"
     )
-    fig.show()
+    fig
     if top_three_filter:
         print(f'Top Three Reasons: {", ".join(data["reason"].tolist())}')
+    return fig
 
 
 def plot_box_based_on_positive_to_negative_point_ratio(df):
@@ -40,7 +41,7 @@ def plot_box_based_on_positive_to_negative_point_ratio(df):
         df["Positive to Negative Points Ratio"],
         title="Positive-to-Negative Ratio Distribution",
     )
-    fig.show()
+    return fig
 
 
 def plot_box_based_on_net_points(df):
@@ -49,7 +50,7 @@ def plot_box_based_on_net_points(df):
         df["Points"],
         title="Net Points Distribution and statistics",
     )
-    fig.show()
+    return fig
 
 
 def top_n_bottom_net_point_perf_bar(df_aggregated, df_plot):
@@ -72,7 +73,7 @@ def top_n_bottom_net_point_perf_bar(df_aggregated, df_plot):
         line_color="red",
         annotation_text="class median",
     )
-    fig.show()
+
     date_info_min = df_aggregated.loc[df_plot["student"]][("Records", "start")].min()
     date_info_max = df_aggregated.loc[df_plot["student"]][("Records", "end")].max()
 
@@ -80,6 +81,7 @@ def top_n_bottom_net_point_perf_bar(df_aggregated, df_plot):
     print(
         f"Mean: {round(class_mean,2)} Std: {round(class_std,2)} Median: {round(class_median,2)}"
     )
+    return fig
 
 
 def top_n_bottom_positive_to_negative_ratio_perf_bar(df_aggregated_ratio, df_plot):
@@ -108,7 +110,7 @@ def top_n_bottom_positive_to_negative_ratio_perf_bar(df_aggregated_ratio, df_plo
         line_color="red",
         annotation_text="class median",
     )
-    fig.show()
+
     date_info_min = df_aggregated_ratio.loc[df_plot["student"]][
         ("Records", "start")
     ].min()
@@ -120,6 +122,7 @@ def top_n_bottom_positive_to_negative_ratio_perf_bar(df_aggregated_ratio, df_plo
     print(
         f"Mean: {round(class_mean,2)} Std: {round(class_std,2)} Median: {round(class_median,2)}"
     )
+    return fig
 
 
 def cumulative_sum_of_points_time_series_line(df_time_series):
@@ -130,7 +133,9 @@ def cumulative_sum_of_points_time_series_line(df_time_series):
         color="student",
         markers=True,
         line_shape="linear",
-        color_discrete_map={key: "darkblue" for key in df_time_series.student.unique()},
+        color_discrete_map={
+            key: "darksalmon" for key in df_time_series.student.unique()
+        },
         title="Cumulative Points Over Time",
     )
     fig.update_traces(line=dict(width=1.5))
@@ -140,4 +145,4 @@ def cumulative_sum_of_points_time_series_line(df_time_series):
     fig.add_hline(
         y=term_median, line_dash="dash", line_color="gold", annotation_text="Median"
     )
-    fig.show()
+    return fig
