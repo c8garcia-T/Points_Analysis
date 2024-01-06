@@ -14,6 +14,7 @@ from point_visual_module.visuals import (
 from points_queries_module.queries import (
     get_head_and_tail_students_based_on_net_points,
     get_head_and_tail_students_based_on_positive_to_negative_point_ratio,
+    get_comments_usage_by_teacher_info,
 )
 from IPython.display import display
 
@@ -48,4 +49,5 @@ if __name__ == "__main__":
             aggregated_data_by_student_with_static_pos_to_neg_ratio_df
         ),
     )
+    comments_info = get_comments_usage_by_teacher_info(points_df)
     print("__main__")
