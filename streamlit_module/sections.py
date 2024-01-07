@@ -2,16 +2,9 @@ import streamlit as st
 from point_visual_module.visuals import (
     points_by_teacher_per_class_bar,
     points_by_reasons_per_class_bar,
-    plot_box_based_on_net_points,
-    plot_box_based_on_positive_to_negative_point_ratio,
     top_n_bottom_net_point_perf_bar,
     top_n_bottom_positive_to_negative_ratio_perf_bar,
     cumulative_sum_of_points_time_series_line,
-)
-
-from points_queries_module.queries import (
-    get_head_and_tail_students_based_on_net_points,
-    get_head_and_tail_students_based_on_positive_to_negative_point_ratio,
 )
 
 
