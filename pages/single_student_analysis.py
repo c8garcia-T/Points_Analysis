@@ -1,8 +1,5 @@
 import streamlit as st
-from point_visual_module.visuals import (
-    plot_box_based_on_net_points,
-    plot_box_based_on_positive_to_negative_point_ratio,
-)
+
 from points_module.data_build import (
     build_clean_df,
     build_aggregated_data_by_student_df,
@@ -13,18 +10,14 @@ from points_queries_module.queries import (
     get_head_and_tail_students_based_on_net_points,
     get_head_and_tail_students_based_on_positive_to_negative_point_ratio,
 )
-from streamlit_module.sections import (
-    section_cumulative_sum_of_points_time_series_line,
-    top_and_bottom_student_section,
-    reasons_and_teacher_plots_section,
-)
+
 from streamlit_module.individual_student_page import reasons_bar
 from streamlit_module.individual_student_page import (
     section_cumulative_sum_of_points_time_series_line_single_student,
 )
 
 # Data Source
-data_source = "points_raw_data_by_class/points_data_vicky_t.xlsx"
+data_source = "public_data_ok/points_data_vicky_t.xlsx"
 # Preliminary Dataset Builds
 points_df = build_clean_df(data_source)
 aggregated_data_by_student_df = build_aggregated_data_by_student_df(data_source)
