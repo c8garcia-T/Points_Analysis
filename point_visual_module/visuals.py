@@ -64,22 +64,12 @@ def top_n_bottom_net_point_perf_bar(df_aggregated, df_plot):
         color_continuous_midpoint=0,
         title="Top and Bottom Performing Students based on Net Points",
     )
-    class_mean = df_aggregated[("Points", "sum")].mean()
     class_median = df_aggregated[("Points", "sum")].median()
-    class_std = df_aggregated[("Points", "sum")].std()
     fig.add_hline(
         y=class_median,
         line_dash="dash",
         line_color="red",
         annotation_text="class median",
-    )
-
-    date_info_min = df_aggregated.loc[df_plot["student"]][("Records", "start")].min()
-    date_info_max = df_aggregated.loc[df_plot["student"]][("Records", "end")].max()
-
-    print(f"Data Range: {date_info_min.date()} to {date_info_max.date()}")
-    print(
-        f"Mean: {round(class_mean,2)} Std: {round(class_std,2)} Median: {round(class_median,2)}"
     )
     return fig
 
@@ -91,7 +81,7 @@ def top_n_bottom_positive_to_negative_ratio_perf_bar(df_aggregated_ratio, df_plo
         x="student",
         y="Positive to Negative Points Ratio",
         color="Positive to Negative Points Ratio",
-        color_continuous_scale="RdBu_r",
+        color_continuous_scale="Reds_r",
         color_continuous_midpoint=0,
         title="Top and Bottom Performing Students based on Positive-to-Negative Point Ratio",
     )
