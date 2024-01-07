@@ -17,7 +17,7 @@ def modify_column(column):
 
 
 if "__name__" == "__name__":
-    raw_data_path = "points_raw_data_by_class/points_data_vicky_t.xlsx"
+    raw_data_path = "points_raw_data_by_class/Sammul_3m_points.xlsx"
     dfs = pd.read_excel(raw_data_path, sheet_name=None, header=None)
     # Modify the fifth column in each DataFrame
     column_to_modify = 4  # Assuming Python indexing (0-based), selects the fifth column

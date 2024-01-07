@@ -19,7 +19,7 @@ def test_get_head_and_tail_students_based_on_net_points():
     data_dir = "points_raw_data_by_class"
     files = os.listdir(data_dir)
     if len(files) > 1:
-        rand_indx = np.random.randint(low=0, high=files)
+        rand_indx = np.random.randint(low=0, high=len(files))
         df = build_aggregated_data_by_student_df(
             os.path.join(data_dir, files[rand_indx])
         )
@@ -38,7 +38,7 @@ def test_get_head_and_tail_students_based_on_positive_to_negative_point_ratio():
     data_dir = "points_raw_data_by_class"
     files = os.listdir(data_dir)
     if len(files) > 1:
-        rand_indx = np.random.randint(low=0, high=files)
+        rand_indx = np.random.randint(low=0, high=len(files))
         df = build_aggregated_data_by_student_with_static_pos_to_neg_ratio_df(
             os.path.join(data_dir, files[rand_indx])
         )
@@ -63,7 +63,7 @@ def test_get_comments_usage_by_teacher_info():
     data_dir = "points_raw_data_by_class"
     files = os.listdir(data_dir)
     if len(files) > 1:
-        rand_indx = np.random.randint(low=0, high=files)
+        rand_indx = np.random.randint(low=0, high=len(files))
         df = build_clean_df(os.path.join(data_dir, files[rand_indx]))
     else:
         df = build_clean_df(os.path.join(data_dir, files[0]))

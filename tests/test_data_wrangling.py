@@ -16,7 +16,7 @@ def test_sheets_merge():
     data_dir = "points_raw_data_by_class"
     files = os.listdir(data_dir)
     if len(files) > 1:
-        rand_indx = np.random.randint(low=0, high=files)
+        rand_indx = np.random.randint(low=0, high=len(files))
         result = sheets_merge(os.path.join(data_dir, files[rand_indx]))
     else:
         result = sheets_merge(os.path.join(data_dir, files[0]))
@@ -30,7 +30,7 @@ def test_data_wrangling():
     data_dir = "points_raw_data_by_class"
     files = os.listdir(data_dir)
     if len(files) > 1:
-        rand_indx = np.random.randint(low=0, high=files)
+        rand_indx = np.random.randint(low=0, high=len(files))
         result = sheets_merge(os.path.join(data_dir, files[rand_indx]))
     else:
         result = sheets_merge(os.path.join(data_dir, files[0]))
@@ -65,7 +65,7 @@ def test_exact_duplicates_handling():
     data_dir = "points_raw_data_by_class"
     files = os.listdir(data_dir)
     if len(files) > 1:
-        rand_indx = np.random.randint(low=0, high=files)
+        rand_indx = np.random.randint(low=0, high=len(files))
         result = sheets_merge(os.path.join(data_dir, files[rand_indx]))
     else:
         result = sheets_merge(os.path.join(data_dir, files[0]))

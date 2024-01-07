@@ -15,9 +15,12 @@ from streamlit_module.individual_student_page import reasons_bar
 from streamlit_module.individual_student_page import (
     section_cumulative_sum_of_points_time_series_line_single_student,
 )
+import os
 
 # Data Source
-data_source = "data_public_ok/points_data_vicky_t.xlsx"
+data_source_options = os.listdir("data_public_ok")
+st.selectbox("Data Source", data_source_options, key="data_source_selected")
+data_source = os.path.join("data_public_ok", st.session_state["data_source_selected"])
 # Preliminary Dataset Builds
 points_df = build_clean_df(data_source)
 aggregated_data_by_student_df = build_aggregated_data_by_student_df(data_source)
@@ -52,6 +55,14 @@ if st.session_state["selected_student"]:
     selected_student = "Sheet" + str(st.session_state["selected_student"])
     subset_df = points_df[(points_df.student == selected_student)]
     st.header(f"Selected Student: {selected_student}", divider="red")
+    st.metric(
+        label="Positive Points Accumulated",
+        value=subset_df.positive_point_assigned.sum(),
+    )
+    st.metric(
+        label="Negative Points Accumulated",
+        value=subset_df.negative_point_assigned.sum(),
+    )
     st.caption(f"Available Records ({subset_df.shape[0]})")
     st.dataframe(
         subset_df,
