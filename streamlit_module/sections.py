@@ -6,6 +6,7 @@ from point_visual_module.visuals import (
     top_n_bottom_positive_to_negative_ratio_perf_bar,
     cumulative_sum_of_points_time_series_line,
 )
+import numpy as np
 
 
 def section_cumulative_sum_of_points_time_series_line(df):
@@ -13,15 +14,16 @@ def section_cumulative_sum_of_points_time_series_line(df):
 
     fig = cumulative_sum_of_points_time_series_line(df)
     st.plotly_chart(fig)
-    st.checkbox(label="Key Insights", key="key_insights_point_analysis_over_time")
-    if st.session_state["key_insights_point_analysis_over_time"]:
-        with open(
-            "markdown_for_streamlit/key_insights_point_analysis_over_time.md",
-            "r",
-            encoding="utf-8",
-        ) as file:
-            markdown_text = file.read()
-            st.markdown(markdown_text)
+    if st.session_state["data_source_selected"] == "points_data_vicky_t.xlsx":
+        st.checkbox(label="Key Insights", key="key_insights_point_analysis_over_time")
+        if st.session_state["key_insights_point_analysis_over_time"]:
+            with open(
+                "markdown_for_streamlit/key_insights_point_analysis_over_time.md",
+                "r",
+                encoding="utf-8",
+            ) as file:
+                markdown_text = file.read()
+                st.markdown(markdown_text)
 
 
 def top_and_bottom_student_section(
@@ -75,9 +77,50 @@ def top_and_bottom_student_section(
             ("Positive to Negative Points Ratio", "Static Estimate")
         ].std()
         st.write(f"Data Range: {date_info_min.date()} to {date_info_max.date()}")
-        st.write(
-            f"Mean {round(class_mean,2)} Std {round(class_std,2)} Median {round(class_median,2)}"
-        )
+        if not class_mean == np.inf:
+            st.write(
+                f"Mean {round(class_mean,2)} Std {round(class_std,2)} Median {round(class_median,2)}"
+            )
+        else:
+            st.write(
+                "Statistics based on students who received at least one negative point!"
+            )
+            never_negative_points_count = (
+                aggregated_data_by_student_with_static_pos_to_neg_ratio_df_in[
+                    ("Positive to Negative Points Ratio", "Static Estimate")
+                ]
+                == np.inf
+            ).sum()
+            st.write(
+                f"Students who never received negative points ({never_negative_points_count})"
+            )
+            class_mean = (
+                aggregated_data_by_student_with_static_pos_to_neg_ratio_df_in[
+                    ("Positive to Negative Points Ratio", "Static Estimate")
+                ]
+                .replace([np.inf], np.nan)
+                .dropna()
+                .mean()
+            )
+            class_median = (
+                aggregated_data_by_student_with_static_pos_to_neg_ratio_df_in[
+                    ("Positive to Negative Points Ratio", "Static Estimate")
+                ]
+                .replace([np.inf], np.nan)
+                .dropna()
+                .median()
+            )
+            class_std = (
+                aggregated_data_by_student_with_static_pos_to_neg_ratio_df_in[
+                    ("Positive to Negative Points Ratio", "Static Estimate")
+                ]
+                .replace([np.inf], np.nan)
+                .dropna()
+                .std()
+            )
+            st.write(
+                f"Mean {round(class_mean,2)} Std {round(class_std,2)} Median {round(class_median,2)}"
+            )
     fig = top_n_bottom_net_point_perf_bar(
         aggregated_data_by_student_df_in,
         head_and_tail_students_based_on_net_points_df_in,
