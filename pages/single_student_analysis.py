@@ -17,7 +17,7 @@ from streamlit_module.individual_student_page import (
 )
 
 # Data Source
-data_source = "public_data_ok/points_data_vicky_t.xlsx"
+data_source = "data_public_ok/points_data_vicky_t.xlsx"
 # Preliminary Dataset Builds
 points_df = build_clean_df(data_source)
 aggregated_data_by_student_df = build_aggregated_data_by_student_df(data_source)
